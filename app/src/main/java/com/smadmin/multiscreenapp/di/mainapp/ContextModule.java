@@ -1,4 +1,4 @@
-package com.smadmin.multiscreenapp.di;
+package com.smadmin.multiscreenapp.di.mainapp;
 
 import android.content.Context;
 
@@ -20,12 +20,11 @@ public class ContextModule {
 
     @Provides
     @Singleton
-    public Context provideContex() {
+    public Context provideContext() {
         return app;
     }
 
     public interface Expose {
-
         Context context();
     }
 }

@@ -14,7 +14,6 @@ import com.smadmin.multiscreenapp.items.model.StubItem;
 public class ItemDetailFragment extends BaseFragment {
 
     private static final String ARGS_ITEM = "args_item";
-
     private TextView tvItemData;
 
     public static ItemDetailFragment newInstance(StubItem stubItem) {

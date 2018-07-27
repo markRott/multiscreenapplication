@@ -1,7 +1,9 @@
-package com.smadmin.multiscreenapp.di;
+package com.smadmin.multiscreenapp.di.mainapp;
 
 import android.content.Context;
 import android.content.res.Resources;
+
+import com.smadmin.multiscreenapp.utils.ResourcesManager;
 
 import javax.inject.Singleton;
 
@@ -13,11 +15,11 @@ public class ResourcesModule {
 
     @Provides
     @Singleton
-    public Resources provideResources(Context context) {
-        return context.getResources();
+    public ResourcesManager provideResources(Context context) {
+        return new ResourcesManager(context);
     }
 
     public interface Expose {
-        Resources resources();
+        ResourcesManager resourcesManager();
     }
 }

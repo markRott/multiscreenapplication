@@ -1,4 +1,4 @@
-package com.smadmin.multiscreenapp.di;
+package com.smadmin.multiscreenapp.di.mainapp;
 
 import javax.inject.Singleton;
 
@@ -9,11 +9,11 @@ import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
 
 @Module
-public class NavigationModule {
+public class CiceroneNavigationModule {
 
     private Cicerone<Router> cicerone;
 
-    public NavigationModule() {
+    public CiceroneNavigationModule() {
         cicerone = Cicerone.create();
     }
 
@@ -30,7 +30,6 @@ public class NavigationModule {
     }
 
     public interface Expose {
-
         Router router();
 
         NavigatorHolder navigatorHolder();
