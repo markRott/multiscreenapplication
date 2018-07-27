@@ -8,6 +8,7 @@ public class StubItem implements Parcelable {
     private final String id;
     private final String content;
     private final String details;
+    private boolean favoriteStatus;
 
     StubItem(String id, String content, String details) {
         this.id = id;
@@ -44,6 +45,14 @@ public class StubItem implements Parcelable {
             return new StubItem[size];
         }
     };
+
+    public void setFavoriteStatus(boolean favoriteStatus) {
+        this.favoriteStatus = favoriteStatus;
+    }
+
+    public boolean isFavoriteStatus() {
+        return favoriteStatus;
+    }
 
     public String getId() {
         return id;

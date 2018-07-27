@@ -16,7 +16,7 @@ import com.smadmin.multiscreenapp.items.model.GenerateStubItems;
 import com.smadmin.multiscreenapp.items.model.StubItem;
 
 public class ItemsListFragment extends BaseFragment
-        implements IRecyclerItemTouchListener<StubItem>, ItemsListViewContract {
+        implements IRecyclerItemTouchListener<StubItem>, ItemsListViewContract, IFavoriteTouch {
 
     private ItemAdapter itemAdapter;
 
@@ -33,8 +33,7 @@ public class ItemsListFragment extends BaseFragment
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_items_list, container, false);
-        return rootView;
+        return inflater.inflate(R.layout.fragment_items_list, container, false);
     }
 
     @Override
@@ -69,12 +68,22 @@ public class ItemsListFragment extends BaseFragment
     }
 
     private void initAdapter() {
-        itemAdapter = new ItemAdapter();
+        itemAdapter = new ItemAdapter(this);
         itemAdapter.setData(GenerateStubItems.ITEMS);
+    }
+
+    @Override
+    public void updateFavoriteState(int position) {
+        itemAdapter.notifyItemChanged(position);
     }
 
     @Override
     public void onTouch(int position, StubItem data) {
         itemsListPresenter.openDetailScreen(data);
+    }
+
+    @Override
+    public void onStarClick(int position, StubItem stubItem) {
+        itemsListPresenter.favoriteAction(position, stubItem);
     }
 }

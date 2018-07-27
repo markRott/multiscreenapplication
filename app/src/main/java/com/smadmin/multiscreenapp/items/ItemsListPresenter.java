@@ -28,4 +28,10 @@ public class ItemsListPresenter extends BasePresenter<ItemsListViewContract> {
     public void openDetailScreen(StubItem stubItem) {
         navigatorManager.getBaseNavigator().openScreen(Const.ScreenKey.DETAIL_SCREEN, stubItem);
     }
+
+    public void favoriteAction(int position, StubItem stubItem) {
+        boolean currFavoriteState = stubItem.isFavoriteStatus();
+        stubItem.setFavoriteStatus(!currFavoriteState);
+        getViewState().updateFavoriteState(position);
+    }
 }

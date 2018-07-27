@@ -45,7 +45,6 @@ dependencies {
     //support libraries with dagger 2
     implementation 'com.google.dagger:dagger-android-support:2.16'
 
-
     // Moxy
     implementation 'com.arello-mobile:moxy:1.5.5'
     implementation 'com.arello-mobile:moxy-app-compat:1.5.5'

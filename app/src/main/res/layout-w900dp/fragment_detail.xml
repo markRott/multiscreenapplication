@@ -22,4 +22,12 @@
         android:gravity="start"
         tools:text="Details" />
 
+    <ImageView
+        android:id="@+id/iv_star"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_star_unfavorite" />
+
 </LinearLayout>
