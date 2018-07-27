@@ -12,7 +12,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.smadmin.multiscreenapp.R;
 import com.smadmin.multiscreenapp.base.BaseFragment;
 import com.smadmin.multiscreenapp.base.IRecyclerItemTouchListener;
-import com.smadmin.multiscreenapp.items.model.GenerateStubItenms;
+import com.smadmin.multiscreenapp.items.model.GenerateStubItems;
 import com.smadmin.multiscreenapp.items.model.StubItem;
 
 public class ItemsListFragment extends BaseFragment
@@ -70,7 +70,7 @@ public class ItemsListFragment extends BaseFragment
 
     private void initAdapter() {
         itemAdapter = new ItemAdapter();
-        itemAdapter.setData(GenerateStubItenms.ITEMS);
+        itemAdapter.setData(GenerateStubItems.ITEMS);
     }
 
     @Override

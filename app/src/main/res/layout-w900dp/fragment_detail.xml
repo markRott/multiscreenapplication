@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_item_data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center" />
+        android:id="@+id/tv_item_id"
+        style="@style/LandscapeTextViewStyle"
+        tools:text="1000" />
+
+    <TextView
+        android:id="@+id/tv_item_content"
+        style="@style/LandscapeTextViewStyle"
+        tools:text="Content" />
+
+    <TextView
+        android:id="@+id/tv_item_details"
+        style="@style/LandscapeTextViewStyle"
+        android:gravity="start"
+        tools:text="Details" />
 
 </LinearLayout>

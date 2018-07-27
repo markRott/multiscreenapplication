@@ -27,8 +27,8 @@ public class ItemAdapter extends BaseRecyclerAdapter<StubItem, ItemAdapter.ItemV
 
     private void fillData(ItemViewHolder holder, int position) {
         final StubItem model = getItemByPosition(position);
-        holder.idView.setText(data.get(position).id);
-        holder.contentView.setText(data.get(position).content);
+        holder.idView.setText(data.get(position).getId());
+        holder.contentView.setText(data.get(position).getContent());
         holder.itemView.setTag(data.get(position));
         setupItemTouchListener(holder.rootView, position, model);
     }

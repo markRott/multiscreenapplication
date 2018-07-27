@@ -5,9 +5,9 @@ import android.os.Parcelable;
 
 public class StubItem implements Parcelable {
 
-    public final String id;
-    public final String content;
-    public final String details;
+    private final String id;
+    private final String content;
+    private final String details;
 
     StubItem(String id, String content, String details) {
         this.id = id;
@@ -44,6 +44,18 @@ public class StubItem implements Parcelable {
             return new StubItem[size];
         }
     };
+
+    public String getId() {
+        return id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getDetails() {
+        return details;
+    }
 
     @Override
     public String toString() {

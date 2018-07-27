@@ -14,7 +14,9 @@ import com.smadmin.multiscreenapp.items.model.StubItem;
 public class ItemDetailFragment extends BaseFragment {
 
     private static final String ARGS_ITEM = "args_item";
-    private TextView tvItemData;
+    private TextView tvItemId;
+    private TextView tvItemContent;
+    private TextView tvItemDetails;
 
     public static ItemDetailFragment newInstance(StubItem stubItem) {
         final ItemDetailFragment fragment = new ItemDetailFragment();
@@ -39,7 +41,9 @@ public class ItemDetailFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        tvItemData = getActivity().findViewById(R.id.tv_item_data);
+        tvItemId = getActivity().findViewById(R.id.tv_item_id);
+        tvItemContent = getActivity().findViewById(R.id.tv_item_content);
+        tvItemDetails = getActivity().findViewById(R.id.tv_item_details);
         fillData();
     }
 
@@ -47,7 +51,9 @@ public class ItemDetailFragment extends BaseFragment {
         if (getArguments() != null) {
             Bundle args = getArguments();
             StubItem stubItem = args.getParcelable(ARGS_ITEM);
-            tvItemData.setText(stubItem != null ? stubItem.toString() : "No item data");
+            tvItemId.setText(stubItem != null ? stubItem.getId() : "No id");
+            tvItemContent.setText(stubItem != null ? stubItem.getContent() : "No content");
+            tvItemDetails.setText(stubItem != null ? stubItem.getDetails() : "No details");
         }
     }
 }

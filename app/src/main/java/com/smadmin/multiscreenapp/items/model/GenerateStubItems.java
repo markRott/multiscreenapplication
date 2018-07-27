@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GenerateStubItenms {
+public class GenerateStubItems {
 
     public static final List<StubItem> ITEMS = new ArrayList<>();
 
@@ -20,7 +20,7 @@ public class GenerateStubItenms {
 
     private static void addItem(StubItem item) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+        ITEM_MAP.put(item.getId(), item);
     }
 
     private static StubItem createDummyItem(int position) {
@@ -29,10 +29,8 @@ public class GenerateStubItenms {
 
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(position);
-        for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
-        }
+        builder.append("Details about Item: ").append(position)
+                .append(" More details information here.");
         return builder.toString();
     }
 }
