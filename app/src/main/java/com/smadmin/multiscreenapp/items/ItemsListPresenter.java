@@ -1,17 +1,15 @@
 package com.smadmin.multiscreenapp.items;
 
 import android.support.annotation.CheckResult;
-import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.smadmin.multiscreenapp.Const;
 import com.smadmin.multiscreenapp.base.BasePresenter;
-import com.smadmin.multiscreenapp.base.SimpleDisposableObserver;
 import com.smadmin.multiscreenapp.di.ComponentsHelper;
+import com.smadmin.multiscreenapp.favorite.FavoriteManager;
+import com.smadmin.multiscreenapp.favorite.IHandleFavoriteStatus;
 import com.smadmin.multiscreenapp.items.model.StubItem;
 import com.smadmin.multiscreenapp.navigator.NavigatorManager;
-import com.smadmin.multiscreenapp.utils.ResourcesManager;
-import com.smadmin.multiscreenapp.utils.RxBus;
 
 import java.util.List;
 import java.util.Objects;
@@ -21,30 +19,33 @@ import javax.inject.Inject;
 import io.reactivex.disposables.Disposable;
 
 @InjectViewState
-public class ItemsListPresenter extends BasePresenter<ItemsListViewContract> {
+public class ItemsListPresenter extends BasePresenter<ItemsListViewContract>
+        implements IHandleFavoriteStatus<StubItem> {
 
     private static final String TAG = ItemsListPresenter.class.getSimpleName();
 
     @Inject
     NavigatorManager navigatorManager;
     @Inject
-    ResourcesManager resourcesManager;
-    @Inject
-    RxBus rxBus;
+    FavoriteManager favoriteManager;
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
         inject();
-        listenFavoriteStatusChanges();
-        Log.d(TAG, "onFirstViewAttach");
+        listenFavoriteStatus();
     }
 
     private void inject() {
         ComponentsHelper.getActivityComponent().inject(this);
     }
 
-    public void openDetailScreen(StubItem stubItem) {
+    private void listenFavoriteStatus() {
+        final Disposable disposable = favoriteManager.listenFavoriteStatusChanges(this);
+        addDisposable(disposable);
+    }
+
+    public void openDetailScreen(final StubItem stubItem) {
         navigatorManager.getBaseNavigator().openScreen(Const.ScreenKey.DETAIL_SCREEN, stubItem);
     }
 
@@ -52,17 +53,11 @@ public class ItemsListPresenter extends BasePresenter<ItemsListViewContract> {
         boolean currFavoriteState = stubItem.isFavoriteStatus();
         stubItem.setFavoriteStatus(!currFavoriteState);
         getViewState().updateFavoriteState(position);
-        notify(stubItem);
-    }
-
-    private void notify(StubItem stubItem){
-        if(resourcesManager.isTabletOrientation()){
-            rxBus.sendData(stubItem);
-        }
+        favoriteManager.notify(stubItem);
     }
 
     @CheckResult
-    public int searchItemPosition(List<StubItem> collection, String itemId) {
+    public int searchItemPosition(final List<StubItem> collection, final String itemId) {
         int updatePosition = 0;
         StubItem currItem;
         if (collection == null || collection.isEmpty()) return updatePosition;
@@ -76,23 +71,8 @@ public class ItemsListPresenter extends BasePresenter<ItemsListViewContract> {
         return updatePosition;
     }
 
-    private void listenFavoriteStatusChanges() {
-        if (resourcesManager.isTabletOrientation()) {
-            Disposable disposable = rxBus.getSubject()
-                    .subscribeWith(new SimpleDisposableObserver<Object>() {
-                        @Override
-                        public void onNext(Object data) {
-                            handleFavoriteStatus(data);
-                        }
-                    });
-            addDisposable(disposable);
-        }
-    }
-
-    private void handleFavoriteStatus(Object data) {
-        if (data instanceof StubItem) {
-            StubItem stubItem = (StubItem) data;
-            getViewState().updateFavoriteState(stubItem);
-        }
+    @Override
+    public void handleFavoriteStatus(final StubItem data) {
+        getViewState().updateFavoriteState(data);
     }
 }

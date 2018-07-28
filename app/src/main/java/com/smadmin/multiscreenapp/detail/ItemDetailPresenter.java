@@ -1,71 +1,52 @@
 package com.smadmin.multiscreenapp.detail;
 
-import android.util.Log;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.smadmin.multiscreenapp.base.BasePresenter;
-import com.smadmin.multiscreenapp.base.SimpleDisposableObserver;
 import com.smadmin.multiscreenapp.di.ComponentsHelper;
+import com.smadmin.multiscreenapp.favorite.FavoriteManager;
+import com.smadmin.multiscreenapp.favorite.IHandleFavoriteStatus;
 import com.smadmin.multiscreenapp.items.model.StubItem;
-import com.smadmin.multiscreenapp.utils.ResourcesManager;
-import com.smadmin.multiscreenapp.utils.RxBus;
 
 import javax.inject.Inject;
 
 import io.reactivex.disposables.Disposable;
 
 @InjectViewState
-public class ItemDetailPresenter extends BasePresenter<ItemDetailViewContract> {
+public class ItemDetailPresenter extends BasePresenter<ItemDetailViewContract>
+        implements IHandleFavoriteStatus<StubItem> {
 
     private static final String TAG = ItemDetailPresenter.class.getSimpleName();
 
     @Inject
-    RxBus rxBus;
-    @Inject
-    ResourcesManager resourcesManager;
+    FavoriteManager favoriteManager;
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
         inject();
-        Log.d(TAG, "onFirstViewAttach");
-        listenFavoriteStatusChanges();
+        listenFavoriteStatus();
     }
 
     private void inject() {
         ComponentsHelper.getActivityComponent().inject(this);
     }
 
+    private void listenFavoriteStatus() {
+        final Disposable disposable = favoriteManager.listenFavoriteStatusChanges(this);
+        addDisposable(disposable);
+    }
+
     public void updateFavoriteRequest(final StubItem stubItem) {
         // TODO: Send request to server
         boolean currFavoriteState = stubItem.isFavoriteStatus();
         stubItem.setFavoriteStatus(!currFavoriteState);
-
         // TODO: Success response from server
         getViewState().setupImageStar();
-        notify(stubItem);
+        favoriteManager.notify(stubItem);
     }
 
-    private void notify(StubItem stubItem) {
-        rxBus.sendData(stubItem);
-    }
-
-    private void listenFavoriteStatusChanges() {
-        if (resourcesManager.isTabletOrientation()) {
-            Disposable disposable = rxBus.getSubject()
-                    .subscribeWith(new SimpleDisposableObserver<Object>() {
-                        @Override
-                        public void onNext(Object data) {
-                            handleFavoriteStatus(data);
-                        }
-                    });
-            addDisposable(disposable);
-        }
-    }
-
-    private void handleFavoriteStatus(Object data) {
-        if (data instanceof StubItem) {
-            getViewState().setupImageStar();
-        }
+    @Override
+    public void handleFavoriteStatus(StubItem data) {
+        getViewState().setupImageStar();
     }
 }

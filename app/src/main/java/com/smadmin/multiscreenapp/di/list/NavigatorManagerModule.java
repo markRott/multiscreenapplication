@@ -1,6 +1,5 @@
 package com.smadmin.multiscreenapp.di.list;
 
-import android.content.res.Resources;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
@@ -13,7 +12,6 @@ import com.smadmin.multiscreenapp.utils.ResourcesManager;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.Router;
 
 @Module

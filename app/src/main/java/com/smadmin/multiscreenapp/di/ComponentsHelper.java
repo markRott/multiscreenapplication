@@ -6,6 +6,7 @@ import com.smadmin.multiscreenapp.MyApp;
 import com.smadmin.multiscreenapp.di.list.ActivityComponent;
 import com.smadmin.multiscreenapp.di.list.ActivityModule;
 import com.smadmin.multiscreenapp.di.list.DaggerActivityComponent;
+import com.smadmin.multiscreenapp.di.list.FavoriteModule;
 import com.smadmin.multiscreenapp.di.list.NavigatorManagerModule;
 import com.smadmin.multiscreenapp.di.list.SupportrFragmentManagerModule;
 import com.smadmin.multiscreenapp.di.mainapp.CiceroneNavigationModule;
@@ -42,6 +43,7 @@ public class ComponentsHelper {
                 .activityModule(new ActivityModule(appCompatActivity))
                 .supportrFragmentManagerModule(new SupportrFragmentManagerModule())
                 .navigatorManagerModule(new NavigatorManagerModule())
+                .favoriteModule(new FavoriteModule())
                 .build();
 //        return null;
     }

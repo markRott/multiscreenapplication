@@ -13,11 +13,13 @@ import dagger.Component;
         modules = {
                 ActivityModule.class,
                 SupportrFragmentManagerModule.class,
-                NavigatorManagerModule.class}
+                NavigatorManagerModule.class,
+                FavoriteModule.class}
 )
 public interface ActivityComponent extends ActivityModule.Expose,
         SupportrFragmentManagerModule.Expose,
-        NavigatorManagerModule.Expose {
+        NavigatorManagerModule.Expose,
+        FavoriteModule.Expose {
 
     void inject(MainActivity mainActivity);
 
