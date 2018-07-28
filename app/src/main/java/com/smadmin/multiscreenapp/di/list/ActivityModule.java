@@ -10,7 +10,7 @@ public class ActivityModule {
 
     private AppCompatActivity appCompatActivity;
 
-    public ActivityModule(AppCompatActivity appCompatActivity) {
+    public ActivityModule(final AppCompatActivity appCompatActivity) {
         this.appCompatActivity = appCompatActivity;
     }
 

@@ -31,7 +31,6 @@ public class CiceroneNavigationModule {
 
     public interface Expose {
         Router router();
-
         NavigatorHolder navigatorHolder();
     }
 }

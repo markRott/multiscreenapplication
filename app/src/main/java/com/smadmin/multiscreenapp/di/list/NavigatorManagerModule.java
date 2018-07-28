@@ -22,10 +22,10 @@ public class NavigatorManagerModule {
     @Provides
     @ActivityScope
     public BaseNavigator provideBaseNavigator(
-            AppCompatActivity appCompatActivity,
-            FragmentManager fragmentManager,
-            Router router,
-            ResourcesManager resourcesManager) {
+            final AppCompatActivity appCompatActivity,
+            final FragmentManager fragmentManager,
+            final Router router,
+            final ResourcesManager resourcesManager) {
 
         final boolean isTablet = resourcesManager.getBoolean(R.bool.tablet);
         BaseNavigator baseNavigator;
@@ -39,7 +39,7 @@ public class NavigatorManagerModule {
 
     @Provides
     @ActivityScope
-    public NavigatorManager provideNavigatorManager(BaseNavigator baseNavigator) {
+    public NavigatorManager provideNavigatorManager(final BaseNavigator baseNavigator) {
         return new NavigatorManager(baseNavigator);
     }
 

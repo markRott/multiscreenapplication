@@ -13,7 +13,7 @@ public abstract class BaseRecyclerAdapter<Item, Holder extends RecyclerView.View
     protected List<Item> data;
     private IRecyclerItemTouchListener<Item> itemTouchListener;
 
-    public BaseRecyclerAdapter() {
+    protected BaseRecyclerAdapter() {
     }
 
     @Override
@@ -47,7 +47,7 @@ public abstract class BaseRecyclerAdapter<Item, Holder extends RecyclerView.View
         return data.isEmpty();
     }
 
-    public Item getItemByPosition(int position) {
+    protected Item getItemByPosition(int position) {
         return data.get(position);
     }
 

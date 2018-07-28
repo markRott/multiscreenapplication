@@ -9,7 +9,10 @@ import ru.terrakok.cicerone.Router;
 
 public final class TabletNavigator extends BaseNavigator {
 
-    public TabletNavigator(AppCompatActivity appCompatActivity, FragmentManager fragmentManager, Router router) {
+    public TabletNavigator(
+            final AppCompatActivity appCompatActivity,
+            final FragmentManager fragmentManager,
+            final Router router) {
         super(appCompatActivity, fragmentManager, router);
     }
 

@@ -14,7 +14,7 @@ public class ContextModule {
 
     private MyApp app;
 
-    public ContextModule(MyApp app) {
+    public ContextModule(final MyApp app) {
         this.app = app;
     }
 

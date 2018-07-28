@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import com.smadmin.multiscreenapp.di.ComponentsHelper;
 import com.smadmin.multiscreenapp.items.ItemsListFragment;
 import com.smadmin.multiscreenapp.navigator.NavigatorManager;
+import com.smadmin.multiscreenapp.utils.ResourcesManager;
 
 import javax.inject.Inject;
 
@@ -15,19 +16,20 @@ import ru.terrakok.cicerone.NavigatorHolder;
 public class MainActivity extends AppCompatActivity {
 
     @Inject
-    public NavigatorHolder navigatorHolder;
-
+    NavigatorHolder navigatorHolder;
     @Inject
     NavigatorManager navigatorManager;
+    @Inject
+    ResourcesManager resourcesManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         inject(savedInstanceState);
-        initToolbar();
 
+        resourcesManager.setScreenOrientation(this);
+        initToolbar();
         addLeftFragment();
     }
 

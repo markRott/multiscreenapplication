@@ -13,18 +13,21 @@ import ru.terrakok.cicerone.commands.Command;
 
 public abstract class BaseNavigator {
 
-    protected Router router;
-    private FragmentManager fragmentManager;
-    private AppCompatActivity appCompatActivity;
+    protected final Router router;
+    private final FragmentManager fragmentManager;
+    private final AppCompatActivity appCompatActivity;
 
-    BaseNavigator(AppCompatActivity appCompatActivity, FragmentManager fragmentManager, Router router) {
+    BaseNavigator(
+            final AppCompatActivity appCompatActivity,
+            final FragmentManager fragmentManager,
+            final Router router) {
         this.appCompatActivity = appCompatActivity;
         this.fragmentManager = fragmentManager;
         this.router = router;
     }
 
     public final Navigator getCiceroneNavigator() {
-        Navigator ciceroneNavigator = new
+        return new
                 SupportFragmentNavigator(fragmentManager, getContainerId()) {
 
                     @Override
@@ -46,11 +49,9 @@ public abstract class BaseNavigator {
                         super.applyCommand(command);
                     }
                 };
-
-        return ciceroneNavigator;
     }
 
     abstract int getContainerId();
 
-    public abstract void openScreen(String screenKey, Object data);
+    public abstract void openScreen(final String screenKey, final Object data);
 }

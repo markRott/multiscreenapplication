@@ -15,7 +15,7 @@ public class ResourcesModule {
 
     @Provides
     @Singleton
-    public ResourcesManager provideResources(Context context) {
+    public ResourcesManager provideResources(final Context context) {
         return new ResourcesManager(context);
     }
 

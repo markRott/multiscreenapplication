@@ -11,7 +11,7 @@ public class SupportrFragmentManagerModule {
 
     @Provides
     @ActivityScope
-    public FragmentManager provideFragmentManager(AppCompatActivity appCompatActivity) {
+    public FragmentManager provideFragmentManager(final AppCompatActivity appCompatActivity) {
         return appCompatActivity.getSupportFragmentManager();
     }
 

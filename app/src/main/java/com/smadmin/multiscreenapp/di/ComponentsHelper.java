@@ -22,7 +22,7 @@ public class ComponentsHelper {
     private ComponentsHelper() {
     }
 
-    public static MainAppComponent initMainAppComponent(MyApp application) {
+    public static MainAppComponent initMainAppComponent(final MyApp application) {
         if (mainAppComponent != null) return mainAppComponent;
         return mainAppComponent = DaggerMainAppComponent.builder()
                 .contextModule(new ContextModule(application))
@@ -32,7 +32,7 @@ public class ComponentsHelper {
 //        return null;
     }
 
-    public static ActivityComponent initActivityComponent(AppCompatActivity appCompatActivity) {
+    public static ActivityComponent initActivityComponent(final AppCompatActivity appCompatActivity) {
         if (activityComponent != null) return activityComponent;
         return activityComponent = DaggerActivityComponent
                 .builder()

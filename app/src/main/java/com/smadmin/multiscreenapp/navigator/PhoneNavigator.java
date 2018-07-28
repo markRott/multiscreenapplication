@@ -9,7 +9,10 @@ import ru.terrakok.cicerone.Router;
 
 public final class PhoneNavigator extends BaseNavigator {
 
-    public PhoneNavigator(AppCompatActivity appCompatActivity, FragmentManager fragmentManager, Router router) {
+    public PhoneNavigator(
+            final AppCompatActivity appCompatActivity,
+            final FragmentManager fragmentManager,
+            final Router router) {
         super(appCompatActivity, fragmentManager, router);
     }
 
@@ -19,7 +22,7 @@ public final class PhoneNavigator extends BaseNavigator {
     }
 
     @Override
-    public void openScreen(String screenKey, Object data) {
+    public void openScreen(final String screenKey, final Object data) {
         router.navigateTo(screenKey, data);
     }
 }

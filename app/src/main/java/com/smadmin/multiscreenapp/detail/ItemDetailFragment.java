@@ -20,12 +20,13 @@ public class ItemDetailFragment extends BaseFragment implements ItemDetailViewCo
     @InjectPresenter
     ItemDetailPresenter detailPresenter;
 
+    private StubItem stubItem;
+    private ImageView ivStar;
     private TextView tvItemId;
     private TextView tvItemContent;
     private TextView tvItemDetails;
-    private ImageView ivStar;
 
-    public static ItemDetailFragment newInstance(StubItem stubItem) {
+    public static ItemDetailFragment newInstance(final StubItem stubItem) {
         final ItemDetailFragment fragment = new ItemDetailFragment();
         final Bundle args = new Bundle();
         args.putParcelable(ARGS_ITEM, stubItem);
@@ -33,37 +34,54 @@ public class ItemDetailFragment extends BaseFragment implements ItemDetailViewCo
         return fragment;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-        return rootView;
+    public View onCreateView(
+            LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
+
+        return inflater.inflate(R.layout.fragment_detail, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initViews();
+        fillViews();
+    }
+
+    private void initViews() {
         tvItemId = getActivity().findViewById(R.id.tv_item_id);
         tvItemContent = getActivity().findViewById(R.id.tv_item_content);
         tvItemDetails = getActivity().findViewById(R.id.tv_item_details);
         ivStar = getActivity().findViewById(R.id.iv_star);
-        fillData();
     }
 
-    private void fillData() {
+    private void fillViews() {
         if (getArguments() != null) {
             Bundle args = getArguments();
-            StubItem stubItem = args.getParcelable(ARGS_ITEM);
-            tvItemId.setText(stubItem != null ? stubItem.getId() : "No id");
-            tvItemContent.setText(stubItem != null ? stubItem.getContent() : "No content");
-            tvItemDetails.setText(stubItem != null ? stubItem.getDetails() : "No details");
-            ivStar.setImageResource(stubItem.isFavoriteStatus() ?
-                    R.drawable.ic_star_favorite : R.drawable.ic_star_unfavorite);
+            stubItem = args.getParcelable(ARGS_ITEM);
+            tvItemId.setText(stubItem != null ? stubItem.getId() : getString(R.string.no_id));
+            tvItemContent.setText(stubItem != null ? stubItem.getContent() : getString(R.string.no_content));
+            tvItemDetails.setText(stubItem != null ? stubItem.getDetails() : getString(R.string.no_details));
+            fillStarView();
         }
+    }
+
+    private void fillStarView() {
+        setupImageStar();
+        ivStar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                detailPresenter.updateFavoriteRequest(stubItem);
+            }
+        });
+    }
+
+    @Override
+    public void setupImageStar() {
+        ivStar.setImageResource(stubItem.isFavoriteStatus() ?
+                R.drawable.ic_star_favorite : R.drawable.ic_star_unfavorite);
     }
 }
