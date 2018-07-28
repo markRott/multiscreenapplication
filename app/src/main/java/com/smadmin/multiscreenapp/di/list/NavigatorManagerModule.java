@@ -25,8 +25,8 @@ public class NavigatorManagerModule {
             final Router router,
             final ResourcesManager resourcesManager) {
 
-        final boolean isTablet = resourcesManager.getBoolean(R.bool.tablet);
         BaseNavigator baseNavigator;
+        final boolean isTablet = resourcesManager.getBoolean(R.bool.tablet);
         if (isTablet) {
             baseNavigator = new TabletNavigator(appCompatActivity, fragmentManager, router);
         } else {

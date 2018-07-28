@@ -15,8 +15,6 @@ import io.reactivex.disposables.Disposable;
 public class ItemDetailPresenter extends BasePresenter<ItemDetailViewContract>
         implements IHandleFavoriteStatus<StubItem> {
 
-    private static final String TAG = ItemDetailPresenter.class.getSimpleName();
-
     @Inject
     FavoriteManager favoriteManager;
 
