@@ -74,12 +74,7 @@ public class ItemDetailFragment extends BaseFragment implements ItemDetailViewCo
 
     private void fillStarView() {
         setupImageStar();
-        ivStar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                detailPresenter.updateFavoriteRequest(stubItem);
-            }
-        });
+        ivStar.setOnClickListener(v -> detailPresenter.updateFavoriteRequest(stubItem));
     }
 
     @Override

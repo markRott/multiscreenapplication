@@ -48,10 +48,17 @@ public class ItemsListPresenter extends BasePresenter<ItemsListViewContract> {
         navigatorManager.getBaseNavigator().openScreen(Const.ScreenKey.DETAIL_SCREEN, stubItem);
     }
 
-    public void favoriteAction(int position, StubItem stubItem) {
+    public void favoriteAction(final int position, final StubItem stubItem) {
         boolean currFavoriteState = stubItem.isFavoriteStatus();
         stubItem.setFavoriteStatus(!currFavoriteState);
         getViewState().updateFavoriteState(position);
+        notify(stubItem);
+    }
+
+    private void notify(StubItem stubItem){
+        if(resourcesManager.isTabletOrientation()){
+            rxBus.sendData(stubItem);
+        }
     }
 
     @CheckResult
