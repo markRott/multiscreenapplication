@@ -32,7 +32,11 @@ public class ItemsListFragment extends BaseFragment
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_items_list, container, false);
     }
 
@@ -51,10 +55,10 @@ public class ItemsListFragment extends BaseFragment
 
     @Override
     public void onPause() {
-        super.onPause();
         if (itemAdapter != null) {
             itemAdapter.setItemTouchListener(null);
         }
+        super.onPause();
     }
 
     private void initRecyclerView() {
@@ -75,6 +79,14 @@ public class ItemsListFragment extends BaseFragment
     @Override
     public void updateFavoriteState(int position) {
         itemAdapter.notifyItemChanged(position);
+    }
+
+    @Override
+    public void updateFavoriteState(final StubItem stubItem) {
+        if (itemAdapter.getData() == null || itemAdapter.isEmpty()) return;
+        int updatePosition = itemsListPresenter
+                .searchItemPosition(itemAdapter.getData(), stubItem.getId());
+        itemAdapter.notifyItemChanged(updatePosition);
     }
 
     @Override

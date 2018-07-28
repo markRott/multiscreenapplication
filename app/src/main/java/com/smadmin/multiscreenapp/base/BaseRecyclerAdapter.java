@@ -59,11 +59,6 @@ public abstract class BaseRecyclerAdapter<Item, Holder extends RecyclerView.View
 
     protected void setupItemTouchListener(View view, final int position, final Item object) {
         if (itemTouchListener == null) return;
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                itemTouchListener.onTouch(position, object);
-            }
-        });
+        view.setOnClickListener(v -> itemTouchListener.onTouch(position, object));
     }
 }

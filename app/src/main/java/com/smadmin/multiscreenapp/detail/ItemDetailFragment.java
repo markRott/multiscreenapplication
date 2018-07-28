@@ -12,6 +12,9 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.smadmin.multiscreenapp.R;
 import com.smadmin.multiscreenapp.base.BaseFragment;
 import com.smadmin.multiscreenapp.items.model.StubItem;
+import com.smadmin.multiscreenapp.utils.RxBus;
+
+import javax.inject.Inject;
 
 public class ItemDetailFragment extends BaseFragment implements ItemDetailViewContract {
 

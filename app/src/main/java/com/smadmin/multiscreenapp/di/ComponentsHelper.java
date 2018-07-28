@@ -13,6 +13,7 @@ import com.smadmin.multiscreenapp.di.mainapp.ContextModule;
 import com.smadmin.multiscreenapp.di.mainapp.DaggerMainAppComponent;
 import com.smadmin.multiscreenapp.di.mainapp.MainAppComponent;
 import com.smadmin.multiscreenapp.di.mainapp.ResourcesModule;
+import com.smadmin.multiscreenapp.di.mainapp.UtilsModule;
 
 public class ComponentsHelper {
 
@@ -28,6 +29,7 @@ public class ComponentsHelper {
                 .contextModule(new ContextModule(application))
                 .ciceroneNavigationModule(new CiceroneNavigationModule())
                 .resourcesModule(new ResourcesModule())
+                .utilsModule(new UtilsModule())
                 .build();
 //        return null;
     }

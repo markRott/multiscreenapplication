@@ -44,12 +44,9 @@ public class ItemAdapter extends BaseRecyclerAdapter<StubItem, ItemAdapter.ItemV
     private void fillStar(ItemViewHolder holder, final StubItem model, final int position) {
         holder.ivStar.setImageResource(model.isFavoriteStatus() ?
                 R.drawable.ic_star_favorite : R.drawable.ic_star_unfavorite);
-        holder.ivStar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (favoriteTouchCallback != null) {
-                    favoriteTouchCallback.onStarClick(position, model);
-                }
+        holder.ivStar.setOnClickListener(v -> {
+            if (favoriteTouchCallback != null) {
+                favoriteTouchCallback.onStarClick(position, model);
             }
         });
     }

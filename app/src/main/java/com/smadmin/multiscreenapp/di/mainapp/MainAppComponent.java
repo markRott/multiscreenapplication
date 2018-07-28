@@ -8,8 +8,9 @@ import dagger.Component;
 @Component(modules = {
         ContextModule.class,
         CiceroneNavigationModule.class,
-        ResourcesModule.class
+        ResourcesModule.class,
+        UtilsModule.class
 })
 public interface MainAppComponent extends ContextModule.Expose, CiceroneNavigationModule.Expose,
-        ResourcesModule.Expose {
+        ResourcesModule.Expose, UtilsModule.Expose {
 }

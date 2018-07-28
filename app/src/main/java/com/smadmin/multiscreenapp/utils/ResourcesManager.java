@@ -28,7 +28,7 @@ public final class ResourcesManager {
         }
     }
 
-    private boolean isTabletOrientation() {
+    public boolean isTabletOrientation() {
         return getBoolean(R.bool.tablet);
     }
 }
